@@ -1,70 +1,25 @@
-# Getting Started with Create React App
+# Getting stared with csv react tool app
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+This project is build using react js and bootstrp for styling.
 
-## Available Scripts
+Getting started with [React] (https://reactjs.org/docs/getting-started.html).
 
-In the project directory, you can run:
+Getting started with [Bootstrap] (https://getbootstrap.com/docs/5.0/getting-started/introduction/).
 
-### `npm start`
+# Project set up
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+## Pre- requites:
+        1- Node js should be installed in the machine, To install [Node] (https://nodejs.org/en/download/).
+        2- A text editor, preferably vs code, to install [vscode] (https://code.visualstudio.com/download).
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
-
-### `npm test`
-
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
-
-### `npm run build`
-
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+## Steps:
+        1- Clone the repo.
+        2- Go to the directory
+        3- run: npm i
+        4- run: json-server --watch db.json
+        5- hit the [localhost-data](http://localhost:3000).
+        6- run: npm start, it may asked to run the app on other port (hit yes).
+        7- Initially, it would not be having data, so try to download the template.
+        8- After downloading the template, add some data into the csv file (or use the csv file that is provided in the repo named as: data.csv).
+        9- Drag the file to the draggable section, and upload it.
+        10- Refresh the page and check the data into the table.

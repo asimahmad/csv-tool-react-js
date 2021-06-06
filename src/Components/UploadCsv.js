@@ -1,14 +1,68 @@
  
-import React, {useState} from "react";
+import React, {useState, useEffect} from "react";
 import { parse } from "papaparse";
+import axios from 'axios'
 
 const UploadCsv= ()=> {
-  const [highlighted, setHighlighted] = React.useState(false);
-  const [data, setData] = useState([]);
+  const [highlighted, setHighlighted] = useState(false);
+  const [data, setData] = useState({});
+  const [drop, setDroped] = useState(false);
 
-  const resetData = () =>{
-    setData([])
+//   const dropped = async(data) =>{
+//     if(data){
+//       for(let i=0;i<data.length-1;i++){
+//           await axios({
+//               method: 'POST',
+//               url: 'http://localhost:3000/data/',
+//               data: {
+//               "id":data[i].id+300,"first_name":data[i].first_name, "age":data[i].age,"dob":data[i].dob, "salary":data[i].salary, "dept":data[i].dept
+//               }
+//             }).then((res) =>{
+//               console.log("Res",res)
+//             }, (err)=>{
+//                 console.log(err);
+//           })
+//       }
+//       console.log("From UploadCSV",data)  ;
+//     }
+// }
+
+const dropped = (data) =>{
+  if(data){
+   
+         axios({
+            method: 'POST',
+            url: 'http://localhost:3000/data/',
+            data: data
+          }).then((res) =>{
+            console.log("Res",res)
+          }, (err)=>{
+              console.log(err);
+        })
+
+    console.log("From UploadCSV",data)  ;
   }
+}
+
+ const resetData = () =>{
+   console.log("Reset data")
+//   if(window.confirm("Are you sure")){
+//     if(data){
+//       for(let i=0;i<data.length-1;i++){
+//            axios({
+//               method: 'DELETE',
+//               url: 'http://localhost:3000/data/',
+//               params:data[i].id              
+//             }).then((res) =>{
+//               console.log("Res",res)
+//             }, (err)=>{
+//                 console.log(err);
+//           })
+//       }
+//       console.log("Deleted data",data)  ;
+//     }
+//   }
+ }
 
   return (
     <>
@@ -26,6 +80,7 @@ const UploadCsv= ()=> {
         }}
         onDragOver={(e) => {
           e.preventDefault();
+          setHighlighted(true)
         }}
         onDrop={(e) => {
           e.preventDefault();
@@ -37,21 +92,15 @@ const UploadCsv= ()=> {
               const text = await file.text();
               const result = parse(text, { header: true });
               setData(() => result.data);
+              dropped(result.data);
+              setDroped(true)
             });
         }}
       >
-        DROP CSV file
+        {!drop?"DROP CSV file":"File uploaded"}
       </div>
       </div>
       <button className="form-control reset" onClick={() => resetData()}>Reset</button>
-
-      <ul>
-        {data.map((item) => (
-          <li key={item.id}>
-            <strong>{item.id}</strong>: {item.title}
-            </li>
-        ))}
-      </ul>
     </>
   );
 }

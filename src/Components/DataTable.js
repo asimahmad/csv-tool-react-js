@@ -5,25 +5,39 @@ import _ from 'lodash'
 const DataTable = () => {
 
     // const pageSize = 10;
-    const [pageSize, setPageSize] = useState(10); 
-    const headers = ["Id", "UserId", "Title", "Status"]
+    const [pageSize, setPageSize] = useState(25); 
+    const headers = ["Name", "Age", "Date of birth", "Salary", "Department"]
     const [postsPerPage, setPostsPerPage] = useState()
     const [currentPage, setCurrentPage] = useState(1);
     const [search, setSearch] = useState("");
+    const [order, setOrder] = useState("desc")
     // const [sorting, setSorting] = useState({colType:"", sortOrder:""})
 
-    const [posts, setPosts] = useState();
+    let [posts, setPosts] = useState();
     useEffect(()=> {
         document.title = 'Assesment by Asim'
-        axios.get('http://jsonplaceholder.typicode.com/todos')
+        axios.get('http://localhost:3000/data/')
         .then(res =>{
-            // console.log(res.data);
-            setPosts(res.data);
-            setPostsPerPage(_(res.data).slice(0).take(pageSize).value())
+            // for(let i=0;i<res.data.length;i++){
+            //     aray.push(res.data[i])
+            //     setPosts(res.data[i])
+            //     setPostsPerPage(_(res.data[0]).slice(0).take(pageSize).value())
+            // }
+             //console.log(res.data);
+             let array = []
+             for(let i =0;i<res.data.length;i++){
+                 for(let j=0;j<res.data[i].length;j++){
+                    array.push(res.data[i][j])
+                 }
+             }
+             //console.log("Main Array", array);
+             //console.log("Main array",aray);
+            setPosts(array);
+            setPostsPerPage(_(array).slice(0).take(pageSize).value())
         }).catch(err =>{
             console.log(err)
         })
-    }, [])
+    },[])
 
     const paginate = (pageNumber) =>{
         setCurrentPage(pageNumber);
@@ -37,17 +51,20 @@ const DataTable = () => {
     const pages = _.range(1, pageCount+1);
    
     const Download = () =>{
+        let csvString;
         let csvRow = [];
-        let dataArray = [['id', 'userId', 'title', 'completed']];
-        for(let i =0;i<posts.length;i++){
-           dataArray.push([posts[i].id, posts[i].userId, posts[i].title, posts[i].completed])
-        }
-        console.log("ArrayData length", dataArray.length)
-        for(let i=0;i<dataArray.length;i++){
-            csvRow.push(dataArray[i].join(","));
-        }
-        let csvString = csvRow.join("%0A");
-        console.log(csvString)
+        let dataArray = [['id','first_name', 'age', 'dob', 'salary', 'dept']];
+        if(posts){
+            for(let i =0;i<posts.length;i++){
+            dataArray.push([posts[i].id,posts[i].first_name, posts[i].age, posts[i].dob,posts[i].salary, posts[i].dept])
+            }}
+            console.log("ArrayData length", dataArray.length)
+            for(let i=0;i<dataArray.length;i++){
+                csvRow.push(dataArray[i].join(","));
+            }
+            csvString = csvRow.join("%0A");
+            //console.log(csvString)
+        
         let a = document.createElement("a");
         a.href= 'data:attachment/csv,'+csvString;
         a.target = "_Blank";
@@ -55,12 +72,53 @@ const DataTable = () => {
         document.body.appendChild(a);
         a.click()
     }
+
+    const sortTable = (head, order)=>{
+        //console.log("This from sort",head,order)
+        if(order==="desc"){
+            if(head==="Name"){
+                posts = posts.sort((a,b) => a.first_name<b.first_name?1:-1)
+            }
+            else if(head==="Salary"){
+                posts = posts.sort((a,b) => a.salary<b.salary?1:-1)
+            }
+            else if(head==="Age"){
+                posts = posts.sort((a,b) => a.age<b.age?1:-1)
+            }
+            else if(head==="Date of birth"){
+                posts = posts.sort((a,b) => a.dob<b.dob?1:-1)
+            }
+            else{
+                posts = posts.sort((a,b) => a.dept<b.dept?1:-1)
+            }
+            setOrder("asec")
+        }else{  
+            if(head==="Name"){
+                posts = posts.sort((a,b) => a.first_name>b.first_name?1:-1)
+            }
+            else if(head==="Salary"){
+                posts = posts.sort((a,b) => a.salary>b.salary?1:-1)
+            }
+            else if(head==="Age"){
+                posts = posts.sort((a,b) => a.age>b.age?1:-1)
+            }
+            else if(head==="Date of birth"){
+                posts = posts.sort((a,b) => a.dob>b.dob?1:-1)
+            }
+            else{
+                posts = posts.sort((a,b) => a.dept>b.dept?1:-1)
+            }
+            setOrder("asec")
+        }
+        paginate(currentPage)
+    }
+
     return (
         <div>
             <button className="form-control download" onClick={() => Download()}>
                 {posts?"download as csv":"Use the template"}
                 </button>
-            <input className="form-control pagesize" type='number' min="10" defaultValue={10} onChange={(e)=>
+            <input className="form-control pagesize" type='number' min="10" defaultValue={25} onChange={(e)=>
                 { if(e.target.value<10 || e.target.value === null || e.target.value === ''){
                     setPageSize(25);
                 } else if(e.target.value > posts.length){
@@ -78,7 +136,7 @@ const DataTable = () => {
                     <thead className="thead-dark">
                         <tr>
                             {headers.map(head => (
-                                <th key={head} style={{cursor:'pointer'}} onClick={() =>console.log(head)} >{head}</th>
+                                <th key={head} shorttype={order} style={{cursor:'pointer'}} onClick={() =>sortTable(head,order)} >{head}</th>
                             ))}
                         </tr>
                     </thead>
@@ -88,22 +146,24 @@ const DataTable = () => {
                                 if(search===''){
                                     return val;
                                 }else if(
-                                    val.id.toString().toLowerCase().includes(search.toLowerCase()) ||
-                                    val.userId.toString().toLowerCase().includes(search.toLowerCase()) ||
-                                    val.title.toLowerCase().includes(search.toLowerCase()) ||
-                                    val.completed.toString().toLowerCase().includes(search.toLowerCase())
+                                    val.first_name.toLowerCase().includes(search.toLowerCase()) ||
+                                    val.age.toString().toLowerCase().includes(search.toLowerCase()) ||
+                                    val.salary.toString().toLowerCase().includes(search.toLowerCase()) ||
+                                    val.dob.toString().toLowerCase().includes(search.toLowerCase()) ||
+                                    val.dept.toLowerCase().includes(search.toLowerCase())
                                 ){
                                     return val;
                                 }
                             }).map((post, index) =>{
                                 return (
                                 <tr key={index}>
-                                    <td>{post.id}</td>
-                                    <td>{post.userId}</td>
-                                    <td>{post.title}</td>
+                                    <td>{post.first_name}</td>
+                                    <td>{post.age}</td>
+                                    <td>{post.dob}</td>
+                                    <td>{post.salary}</td>
                                     <td>
-                                        <p className={post.completed ? "btn btn-success": "btn btn-danger"}>
-                                            {post.completed? "Completed": "Pending"}
+                                        <p>
+                                            {post.dept}
                                         </p>
                                     </td>
                                 </tr>
