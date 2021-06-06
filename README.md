@@ -28,8 +28,7 @@ Getting started with [Bootstrap](https://getbootstrap.com/docs/5.0/getting-start
 
 
 
-## If get any problem while installing the dependancies, please go through the logs and go through the official documentations over cloud.
-
+<span style="color:green"> If get any problem while installing the dependancies, please go through the logs and go through the official documentations over cloud.</span>
 
 # Screenshot of the app.
 
