@@ -98,3 +98,11 @@
     color: wheat;
     border-radius: 10px;
 }
+
+.dragHigh {
+    border-color: green;
+}
+
+.dragNor {
+    border-color: bisque;
+}

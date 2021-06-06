@@ -1,6 +1,6 @@
 {
     "name": "csv-tool",
-    "homepage": "https://asimahmad.github.io/csv-tool-react-js",
+    "homepage": "http://asimahmad.github.io/csv-tool-react-js",
     "version": "0.1.0",
     "private": true,
     "dependencies": {
