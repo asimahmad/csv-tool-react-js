@@ -1,6 +1,6 @@
 {
   "files": {
-    "main.css": "/csv-tool-react-js/static/css/main.261e88e2.chunk.css",
+    "main.css": "/csv-tool-react-js/static/css/main.70020a50.chunk.css",
     "main.js": "/csv-tool-react-js/static/js/main.7984cf35.chunk.js",
     "main.js.map": "/csv-tool-react-js/static/js/main.7984cf35.chunk.js.map",
     "runtime-main.js": "/csv-tool-react-js/static/js/runtime-main.5273fc5e.js",
@@ -12,14 +12,14 @@
     "static/js/3.637b4a03.chunk.js.map": "/csv-tool-react-js/static/js/3.637b4a03.chunk.js.map",
     "index.html": "/csv-tool-react-js/index.html",
     "static/css/2.4f8976c6.chunk.css.map": "/csv-tool-react-js/static/css/2.4f8976c6.chunk.css.map",
-    "static/css/main.261e88e2.chunk.css.map": "/csv-tool-react-js/static/css/main.261e88e2.chunk.css.map",
+    "static/css/main.70020a50.chunk.css.map": "/csv-tool-react-js/static/css/main.70020a50.chunk.css.map",
     "static/js/2.5737bbc0.chunk.js.LICENSE.txt": "/csv-tool-react-js/static/js/2.5737bbc0.chunk.js.LICENSE.txt"
   },
   "entrypoints": [
     "static/js/runtime-main.5273fc5e.js",
     "static/css/2.4f8976c6.chunk.css",
     "static/js/2.5737bbc0.chunk.js",
-    "static/css/main.261e88e2.chunk.css",
+    "static/css/main.70020a50.chunk.css",
     "static/js/main.7984cf35.chunk.js"
   ]
 }
