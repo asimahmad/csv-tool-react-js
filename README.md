@@ -29,3 +29,8 @@ Getting started with [Bootstrap](https://getbootstrap.com/docs/5.0/getting-start
 
 
 ## If get any problem while installing the dependancies, please go through the logs and go through the official documentations over cloud.
+
+
+# Screenshot of the app.
+
+<img  src="./Screenshot 2021-06-06 at 8.04.59 PM.png" alt="screenshot"/>
