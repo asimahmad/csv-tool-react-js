@@ -35,35 +35,19 @@ const DataTable = () => {
     const pageCount = posts? Math.ceil(posts.length/pageSize) :0
     if(pageCount === 1) return null;
     const pages = _.range(1, pageCount+1);
-    //console.log(pages);
-
-
-    //console.log("Post l",posts.length)
-
+   
     const Download = () =>{
         let csvRow = [];
         let dataArray = [['id', 'userId', 'title', 'completed']];
-        //dataArray.push([1,2,"Asim",true]);
-        //console.log(dataArray)
         for(let i =0;i<posts.length;i++){
            dataArray.push([posts[i].id, posts[i].userId, posts[i].title, posts[i].completed])
-            //console.log(posts[i].id, posts[i].userId, posts[i].title, posts[i].completed)
-            //console.log(posts[i]);
         }
-        // for(let i=0;i<dataArray.length;i++){
-        //     console.log(dataArray[i]);
-        // }
-       // console.log("ArrayData", dataArray);
         console.log("ArrayData length", dataArray.length)
         for(let i=0;i<dataArray.length;i++){
             csvRow.push(dataArray[i].join(","));
-    //        console.log("Data Values",dataArray[i]);
-    //        console.log(i);
         }
         let csvString = csvRow.join("%0A");
         console.log(csvString)
-        //console.log(csvRow.length)
-        //console.log(csvRow)
         let a = document.createElement("a");
         a.href= 'data:attachment/csv,'+csvString;
         a.target = "_Blank";
@@ -138,8 +122,6 @@ const DataTable = () => {
                                 </li>
                         })
                     }
-                    {/* <li className="page-link">1</li>
-                    <li className="page-link">2</li> */}
                 </ul>
             </nav>
         </div>
