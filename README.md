@@ -1,6 +1,6 @@
 # Getting started with csv react tool app
 
-This project is build using react js and bootstrp for styling.
+This project is built using react js and bootstrap for styling.
 
 Getting started with [React](https://reactjs.org/docs/getting-started.html).
 
@@ -21,7 +21,7 @@ Getting started with [Bootstrap](https://getbootstrap.com/docs/5.0/getting-start
     4- run: json-server --watch db.json
     5- hit the [http://localhost:3000](http://localhost:3000) .
     6- run: npm start, it may asked to run the app on other port: hit yes, ( try this in the new terminal, don't suspend the previous terminal).
-    7- Initially, it would not be having data but if it have some try to reset it, then try to download the template.
+    7- Initially, it would not be having data but if it has some try to reset it, then try to download the template.
     8- After downloading the template, add some data into the csv file (or use the csv file that is provided in the repo named as: data.csv under root folder).
     9- Drag the file to the draggable section, and upload it.
     10- Check the data into the table.
@@ -29,7 +29,7 @@ Getting started with [Bootstrap](https://getbootstrap.com/docs/5.0/getting-start
 
 
 
-<span style="color:green"> If get any problem while installing the dependancies, please go through the logs and go through the official documentations over cloud.</span>
+<span style="color:green"> If get any problem while installing the dependancies, please go through the logs and go through the official documentations.</span>
 
 # Screenshot of the app.
 
