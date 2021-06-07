@@ -8,7 +8,7 @@ Getting started with [Bootstrap](https://getbootstrap.com/docs/5.0/getting-start
 
 # Project set up
 
-## Pre- requites:
+## Pre-requisites:
     1- Node js should be installed in the machine, To install [Node](https://nodejs.org/en/download/).
     2- A text editor, preferably vs code, to install [vscode](https://code.visualstudio.com/download).
     3- Git should be installed.
