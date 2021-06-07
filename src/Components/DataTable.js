@@ -16,7 +16,7 @@ const DataTable = () => {
     let [posts, setPosts] = useState();
     useEffect(()=> {
         document.title = 'Assesment by Asim'
-        axios.get('http://localhost:3000/data/')
+        axios.get('https://cors-anywhere.herokuapp.com/http://localhost:3000/data/')
         .then(res =>{
             // for(let i=0;i<res.data.length;i++){
             //     aray.push(res.data[i])
