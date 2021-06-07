@@ -1,4 +1,4 @@
-# Getting stared with csv react tool app
+# Getting started with csv react tool app
 
 This project is build using react js and bootstrp for styling.
 
