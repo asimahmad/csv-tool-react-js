@@ -2,8 +2,7 @@ import React, {useState,useEffect} from 'react';
 import axios from 'axios'
 import _ from 'lodash'
 
-const DataTable = () => {
-
+const DataTable = ({updated}) => {
     // const pageSize = 10;
     const [pageSize, setPageSize] = useState(25); 
     const headers = ["Name", "Age", "Date of birth", "Salary", "Department"]
@@ -11,33 +10,24 @@ const DataTable = () => {
     const [currentPage, setCurrentPage] = useState(1);
     const [search, setSearch] = useState("");
     const [order, setOrder] = useState("desc")
-    // const [sorting, setSorting] = useState({colType:"", sortOrder:""})
 
     let [posts, setPosts] = useState();
     useEffect(()=> {
         document.title = 'Assesment by Asim'
-        axios.get('https://cors-anywhere.herokuapp.com/http://localhost:3000/data/')
+        axios.get('http://localhost:3000/data/')
         .then(res =>{
-            // for(let i=0;i<res.data.length;i++){
-            //     aray.push(res.data[i])
-            //     setPosts(res.data[i])
-            //     setPostsPerPage(_(res.data[0]).slice(0).take(pageSize).value())
-            // }
-             //console.log(res.data);
              let array = []
              for(let i =0;i<res.data.length;i++){
                  for(let j=0;j<res.data[i].length;j++){
                     array.push(res.data[i][j])
                  }
              }
-             //console.log("Main Array", array);
-             //console.log("Main array",aray);
             setPosts(array);
             setPostsPerPage(_(array).slice(0).take(pageSize).value())
         }).catch(err =>{
             console.log(err)
         })
-    },[])
+    },[updated])
 
     const paginate = (pageNumber) =>{
         setCurrentPage(pageNumber);
@@ -62,9 +52,7 @@ const DataTable = () => {
             for(let i=0;i<dataArray.length;i++){
                 csvRow.push(dataArray[i].join(","));
             }
-            csvString = csvRow.join("%0A");
-            //console.log(csvString)
-        
+            csvString = csvRow.join("%0A");        
         let a = document.createElement("a");
         a.href= 'data:attachment/csv,'+csvString;
         a.target = "_Blank";
@@ -74,7 +62,6 @@ const DataTable = () => {
     }
 
     const sortTable = (head, order)=>{
-        //console.log("This from sort",head,order)
         if(order==="desc"){
             if(head==="Name"){
                 posts = posts.sort((a,b) => a.first_name<b.first_name?1:-1)

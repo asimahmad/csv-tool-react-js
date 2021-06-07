@@ -3,33 +3,33 @@ import React, {useState, useEffect} from "react";
 import { parse } from "papaparse";
 import axios from 'axios'
 
-const UploadCsv= ()=> {
+const UploadCsv= ({setUpdated})=> {
   const [highlighted, setHighlighted] = useState(false);
   const [data, setData] = useState({});
   const [drop, setDroped] = useState(false);
+  const [dele, setDele]= useState([]);
+  const [resetClick, setResetClick] = useState(0);
 
-//   const dropped = async(data) =>{
-//     if(data){
-//       for(let i=0;i<data.length-1;i++){
-//           await axios({
-//               method: 'POST',
-//               url: 'http://localhost:3000/data/',
-//               data: {
-//               "id":data[i].id+300,"first_name":data[i].first_name, "age":data[i].age,"dob":data[i].dob, "salary":data[i].salary, "dept":data[i].dept
-//               }
-//             }).then((res) =>{
-//               console.log("Res",res)
-//             }, (err)=>{
-//                 console.log(err);
-//           })
-//       }
-//       console.log("From UploadCSV",data)  ;
-//     }
-// }
+
+  useEffect(()=> {
+    axios.get('http://localhost:3000/data/')
+    .then(res =>{
+         let array = []
+         for(let i =0;i<res.data.length;i++){
+             for(let j=0;j<res.data[i].length;j++){
+                array.push(res.data[i][j])
+             }
+         }
+         console.log(array);
+        setDele(array);
+        console.log("From use effect of reset",dele)
+    }).catch(err =>{
+        console.log(err)
+    })
+},[resetClick])
 
 const dropped = (data) =>{
   if(data){
-   
          axios({
             method: 'POST',
             url: 'http://localhost:3000/data/',
@@ -40,28 +40,26 @@ const dropped = (data) =>{
               console.log(err);
         })
 
-    console.log("From UploadCSV",data)  ;
+    //console.log("From UploadCSV",data)  ;
   }
 }
 
  const resetData = () =>{
-   console.log("Reset data")
-//   if(window.confirm("Are you sure")){
-//     if(data){
-//       for(let i=0;i<data.length-1;i++){
-//            axios({
-//               method: 'DELETE',
-//               url: 'http://localhost:3000/data/',
-//               params:data[i].id              
-//             }).then((res) =>{
-//               console.log("Res",res)
-//             }, (err)=>{
-//                 console.log(err);
-//           })
-//       }
-//       console.log("Deleted data",data)  ;
-//     }
-//   }
+    setResetClick(prev=>prev+1);
+    if(dele){
+      for(let i=1;i<dele.length;i++){
+            axios({
+               method: 'DELETE',
+               url: 'http://localhost:3000/data/'+i,            
+             }).then((res) =>{
+               console.log("Res",res)
+             }, (err)=>{
+                 console.log(err);
+           })
+    }
+      console.log("Deleted data",data)  ;
+  }
+  setUpdated(prev=>prev+1);
  }
 
   return (
@@ -94,6 +92,7 @@ const dropped = (data) =>{
               setData(() => result.data);
               dropped(result.data);
               setDroped(true)
+              setUpdated(prev => prev+1);
             });
         }}
       >
